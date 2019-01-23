@@ -1,0 +1,17 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: cowsay-server
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        name: cowsay-server
+    spec:
+      containers:
+      - name: cowsay-server
+        image: cowsay-server
+        ports:
+        - containerPort: 80
