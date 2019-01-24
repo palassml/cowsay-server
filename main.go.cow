@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"os"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -13,8 +14,11 @@ func handler(w http.ResponseWriter, r *http.Request) {
                 ||----w |
                 ||     ||
 `
-
-	fmt.Fprintf(w, "Hi there %s " + cowFooter, r.URL.Path[1:])
+	host, err := os.Hostname()
+	if err != nil {
+		panic(err)
+	}
+	fmt.Fprintf(w, "Hi there %s " + cowFooter + "\n\n" + host, r.URL.Path[1:])
 }
 
 func main() {
