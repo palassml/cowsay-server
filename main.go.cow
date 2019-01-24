@@ -1,0 +1,23 @@
+package main
+
+import (
+	"fmt"
+	"net/http"
+)
+
+func handler(w http.ResponseWriter, r *http.Request) {
+		cowFooter := `
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+`
+
+	fmt.Fprintf(w, "Hi there %s " + cowFooter, r.URL.Path[1:])
+}
+
+func main() {
+	http.HandleFunc("/", handler)
+	http.ListenAndServe(":80", nil)
+}
